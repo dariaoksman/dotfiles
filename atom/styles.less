@@ -1,0 +1,194 @@
+@import "syntax-variables";
+@import "ui-variables";
+
+.editor { line-height: 1.3 }
+
+.theme-one-light-ui, .theme-one-dark-ui {
+  .status-bar { font-size: 12px; }
+  .tab-bar { font-size: 12px; }
+  .tree-view { font-size: 12px; }
+}
+
+ @tab-height: 24px;
+ @line-height: @tab-height;
+
+.tab-bar {
+  height: @tab-height + 1;
+  line-height: @tab-height;
+  border-bottom: 1px solid #333333;
+  padding-left: 1px;
+
+  &:after {
+    display: none;
+  }
+
+  .tab, .tab.active {
+    height: @tab-height;
+    line-height: @line-height;
+    border-left: 0;
+    border-right: 1px solid #333333;
+    margin: 0 1px 0 0;
+    padding: 0 0 0 5px;
+    top:0;
+
+
+    &:first-child {
+      margin-left: 0;
+      padding-left: 5px;
+    }
+
+    &:before, &:after {
+      display: none;
+    }
+
+    .title {
+      line-height: @tab-height;
+    }
+
+    .close-icon {
+      top: 1px;
+      line-height: @line-height;
+      height: @line-height;
+      right: 5px;
+    }
+
+    &.modified .close-icon {
+      heigth: 8px;
+      right: 5px;
+      line-height: @line-height;
+    }
+  }
+}
+
+.status-bar {
+  line-height: 18px;
+  height: 20px;
+}
+
+.list-group li:not(.list-nested-item), .list-tree li:not(.list-nested-item), .list-group li.list-nested-item > .list-item, .list-tree li.list-nested-item > .list-item {
+  line-height: 23px;
+}
+
+.list-tree.has-collapsable-children .list-nested-item > .list-tree > li, .list-tree.has-collapsable-children .list-nested-item > .list-group > li {
+  padding-left: 10px;
+}
+
+// Highlights the cursor line
+atom-text-editor::shadow {
+  .cursor-line {
+    background-color: @background-color-highlight;
+  }
+}
+
+// Un-italicizes comments
+atom-text-editor::shadow {
+  .comment {
+    font-style: normal;
+  }
+}
+
+// Makes the cursor pulse instead of blink
+atom-text-editor::shadow {
+  .cursor {
+    transition: opacity 0.5s;
+  }
+}
+
+// Un-italicizes code markup in Markdown
+atom-text-editor::shadow {
+  .markup.raw.gfm {
+    font-style: normal;
+    color: @syntax-color-keyword;
+  }
+}
+
+// Brightens the gutter diff indicators to make them more visible
+.diff-icon(@color) {
+  background-color: fade(@color, 60%);
+
+  &:before {
+    color: contrast(fade(@color, 60%));
+  }
+}
+
+.diff-border(@color) {
+  border-color: lighten(@color, 15%);
+  border-left-width: 4px;
+}
+
+@gutter-padding: 15px;
+
+atom-text-editor::shadow {
+  .gutter .line-number {
+    padding-left: @gutter-padding;
+
+    &.git-line-added {
+      .diff-border(@text-color-success);
+      padding-left: @gutter-padding - 4;
+    }
+
+    &.git-line-modified {
+      .diff-border(@text-color-warning);
+      padding-left: @gutter-padding - 4;
+    }
+
+    &.git-line-removed {
+      .diff-border(@text-color-error);
+      padding-left: @gutter-padding;
+    }
+  }
+
+  .gutter.git-diff-icon .line-number {
+    &.git-line-added {
+      .diff-icon(@text-color-success);
+    }
+
+    &.git-line-modified {
+      .diff-icon(@text-color-warning);
+    }
+
+    &.git-line-removed {
+      .diff-icon(@text-color-error);
+    }
+  }
+}
+
+// Makes the bracket matcher highlight more noticeable
+atom-text-editor::shadow {
+  .bracket-matcher .region {
+    border-bottom: 1px solid yellow;
+  }
+}
+
+
+// Highlights trailing whitespace except on the cursor line
+atom-text-editor::shadow {
+  div.line:not(.cursor-line) {
+    .trailing-whitespace {
+      background-color: @background-color-error;
+      color: contrast(@background-color-error);
+    }
+  }
+}
+
+// https://discuss.atom.io/t/crazy-3d-angled-tree-view/18765
+#atom-perspective() {
+  @viewing-distance: 12in;
+  @rotation: 20deg;
+
+  .tree-view-scroller {
+    transform: translateY(-10vh) perspective(@viewing-distance) rotateY(@rotation);
+    padding-top: 12vh;
+    padding-bottom: 12vh;
+    transform-origin: left;
+    width: 120%;
+    height: 120%;
+  }
+  body /deep/ atom-text-editor-minimap {
+    transform: perspective(@viewing-distance) rotateY(-@rotation);
+    transform-origin: right;
+  }
+}
+
+// Comment or uncomment the next line to control whether the atom-perspective feature is enabled
+// #atom-perspective;

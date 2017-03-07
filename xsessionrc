@@ -1,0 +1,18 @@
+#!/bin/bash
+
+export TERMINAL=urxvt
+xrandr --dpi 282
+
+setxkbmap -option ctrl:nocaps
+setxkbmap -option terminate:ctrl_alt_bksp
+
+touchpad_id=$(xinput --list | grep "Touchpad" | xargs -n 1 | grep "id=" | sed 's/id=//g')
+tap_code=$(xinput --list-props $touchpad_id | awk '/Tapping Enabled \(/ {print $4}' | grep -o '[0-9]\+')
+tap_drag_code=$(xinput --list-props $touchpad_id | awk '/Tapping Drag Enabled \(/ {print $5}' | grep -o '[0-9]\+')
+accel_speed_code=$(xinput --list-props $touchpad_id | awk '/Accel Speed \(/ {print $4}' | grep -o '[0-9]\+')
+coordinate_matrix_code=$(xinput --list-props $touchpad_id | awk '/Coordinate Transformation Matrix \(/ {print $4}' | grep -o '[0-9]\+')
+
+xinput --set-prop $touchpad_id $tap_code 1  
+xinput --set-prop $touchpad_id $tap_drag_code 0
+xinput --set-prop $touchpad_id $accel_speed_code 1
+xinput --set-prop $touchpad_id $coordinate_matrix_code 4 0 0 0 2 0 0 0 1
