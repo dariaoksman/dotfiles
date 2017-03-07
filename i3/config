@@ -156,7 +156,7 @@ bar {
 
 # Startup 
 exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/i3.jpg
-exec --no-startup-id xautolock -locker "i3lock -i /home/shantae/Pictures/Wallpapers/windows311.png" -time 3
+exec --no-startup-id xautolock -locker "i3lock -i ~/Pictures/Wallpapers/windows311.png" -time 3
 
 # Logout
 bindsym $mod+0 exec i3lock -i ~/Pictures/Wallpapers/windows311.png -p win
