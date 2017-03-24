@@ -18,7 +18,7 @@ URxvt.saveLines:        8192
 URxvt.underlineColor:   yellow
 URxvt.visualBell:       true
 URxvt.secondaryWheel:   true
-URxvt*print-pipe:       cat > $(echo $HOME/urxvt.dump.$(date +'%Y%m%d%H%m%S'))
+URxvt*print-pipe:       cat > /dev/null
 URxvt.perl-ext-common:  default,font-size
 URxvt.keysym.C-Up:      perl:font-size:increase
 URxvt.keysym.C-Down:    perl:font-size:decrease

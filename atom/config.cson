@@ -12,6 +12,8 @@
     userId: "f1874d7a-d7da-4c8a-ad56-4c1fde77ff99"
   "one-dark-ui":
     layoutMode: "Compact"
+  welcome:
+    showOnStartup: false
 ".coffee.source":
   editor:
     autoIndentOnPaste: true

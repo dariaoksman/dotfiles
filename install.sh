@@ -2,7 +2,7 @@
 
 DIR="$HOME/dotfiles"
 BACKUP_DIR="$HOME/dotfiles_bkp"
-DOTFILES="bash_aliases gitconfig vimrc Xdefaults xsessionrc"
+DOTFILES="bash_aliases gitconfig tigrc vimrc Xdefaults xsessionrc"
 
 mkdir -p $BACKUP_DIR 
 cd $DIR

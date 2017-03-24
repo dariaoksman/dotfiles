@@ -1,0 +1,6 @@
+set vertical-split = no 
+set split-view-height = 80%
+set tab-size = 4
+set diff-context = 6
+set ignore-case = yes
+set wrap-lines = yes
